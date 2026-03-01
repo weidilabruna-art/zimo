@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel ZIMO - A Mira Perfeita ao seu Alcance</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            yellow: {
+              400: '#9333ea',
+              500: '#6513B1',
+              600: '#4a0e82',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="js/notiflix-aio-2.6.0.min.js"></script>
+  <link rel="stylesheet" href="css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tema AMARELO + Overrides de "vermelho" -->
+  <style>
+    :root {
+      --brand-yellow: #6513B1;
+    }
+
+    /* Botões/CTAs */
+    .btn-brand {
+      background: var(--brand-yellow) !important;
+      color: #fff !important;
+      font-weight: 700;
+      box-shadow: 0 10px 26px rgba(101, 19, 177, .25) !important;
+      transition: transform .2s, filter .2s !important;
+    }
+
+    .btn-brand:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    /* Utilitários de marca */
+    .text-brand {
+      color: var(--brand-yellow) !important;
+    }
+
+    .bg-brand {
+      background: var(--brand-yellow) !important;
+    }
+
+    .border-brand {
+      border-color: var(--brand-yellow) !important;
+    }
+
+    .ring-brand {
+      border-color: var(--brand-yellow) !important;
+    }
+
+    .label-brand {
+      color: var(--brand-yellow) !important;
+    }
+
+    .shadow-brand {
+      box-shadow: 0 0 0 2px rgba(101, 19, 177, .25), 0 25px 40px rgba(0, 0, 0, .35) !important;
+    }
+
+    .accent-brand {
+      accent-color: var(--brand-yellow) !important;
+    }
+
+    .focus-ring-brand:focus {
+      outline: 0 !important;
+      box-shadow: 0 0 0 2px rgba(101, 19, 177, .45) !important;
+    }
+
+    /* Substitui qualquer vermelho padrão por amarelo (usado pelo JS/HTML antigo) */
+    .text-red-500,
+    .text-red-400,
+    .text-red-300,
+    .bg-red-600,
+    .bg-red-700,
+    .bg-red-900\/20,
+    .border-red-500,
+    .border-red-500\/30,
+    .border-red-500\/50,
+    .hover\:bg-red-600:hover,
+    .hover\:bg-red-700:hover,
+    .shadow-red-500\/20,
+    .hover\:shadow-red-500\/30:hover {
+      color: var(--brand-yellow) !important;
+      border-color: var(--brand-yellow) !important;
+      background-color: rgba(101, 19, 177, .10) !important;
+      box-shadow: 0 10px 26px rgba(101, 19, 177, .25) !important;
+    }
+
+    /* Gradientes que tinham vermelho */
+    .from-yellow-500.to-red-500 {
+      background-image: linear-gradient(to right, rgb(101 19 177), rgb(74 14 130)) !important;
+    }
+
+    /* Carrossel dots */
+    #carousel-dots button {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: none;
+      background: #333;
+    }
+
+    #carousel-dots button.active {
+      background: var(--brand-yellow) !important;
+    }
+
+    /* Setas do carrossel */
+    #prev-slide:hover,
+    #next-slide:hover {
+      background: var(--brand-yellow) !important;
+      color: #000 !important;
+    }
+
+    /* Notiflix em amarelo */
+    .notiflix-notify {
+      background: #0a0a0a !important;
+      color: #e5e7eb !important;
+      border-left: 4px solid var(--brand-yellow) !important;
+      box-shadow: 0 0 20px rgba(101, 19, 177, .25) !important;
+      border-radius: 8px !important;
+    }
+
+    .notiflix-notify-message strong {
+      color: var(--brand-yellow) !important;
+    }
+
+    /* Switches/toggles que eram vermelhos */
+    .switch-bg:checked {
+      background-color: var(--brand-yellow) !important;
+    }
+
+    .switch-bg:checked+.switch-label {
+      background-color: var(--brand-yellow) !important;
+    }
+
+    .phone-screen .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: var(--brand-yellow) !important;
+    }
+
+    /* Animações que tinham glow vermelho -> amarelo */
+    @keyframes pulse-attention {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(101, 19, 177, .7);
+      }
+
+      70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px 15px rgba(101, 19, 177, 0);
+      }
+
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(101, 19, 177, 0);
+      }
+    }
+
+    .pulse-attention {
+      animation: pulse-attention 2s infinite !important;
+    }
+
+    @keyframes pulse-glow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 20px rgba(101, 19, 177, .4), 0 0 0px 3px rgba(101, 19, 177, .6);
+      }
+
+      50% {
+        box-shadow: 0 0 40px rgba(101, 19, 177, .6), 0 0 0px 3px rgba(101, 19, 177, .6);
+      }
+    }
+
+    .pulse-glow {
+      animation: pulse-glow 2s infinite !important;
+    }
+
+    /* FAQ específico: se JS ainda usar classes "red", forçamos amarelo */
+    #faq-container .border-red-500,
+    #faq-container .border-red-500\/30,
+    #faq-container .border-red-500\/50,
+    #faq-container .bg-red-900\/20 {
+      border-color: var(--brand-yellow) !important;
+      background-color: rgba(101, 19, 177, .10) !important;
+    }
+
+    #faq-container .text-red-500 {
+      color: var(--brand-yellow) !important;
+    }
+  </style>
+
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1059470159233925');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1059470159233925&ev=PageView&noscript=1" /></noscript>
+  <!-- End Meta Pixel Code -->
+
+<body class="bg-black text-gray-200">
+  <!-- HEADER ABSOLUTO LOGO + PT / ES -->
+  <div id="top-header-ffh4x">
+    <div id="top-header-ffh4x-inner">
+      <!-- LOGO -->
+      <img src="images/Design sem nome (68).png" alt="Logo" class="top-header-logo">
+
+      <!-- BOTÕES PT / ES -->
+      <div class="top-header-lang">
+        <a href="#">
+          <img src="images/Frame-9.webp" alt="PT" class="top-header-flag">
+        </a>
+        <a href="#">
+          <img src="images/ES (3) (1).png" alt="ES" class="top-header-flag">
+        </a>
+      </div>
+    </div>
+  </div>
+  <main>
+
+
+    <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck
+      data-utmify-prevent-subids async defer></script>
+
+    <script>
+      window.pixelId = "696b02c267453ea6c5e865fc";
+      var a = document.createElement("script");
+      a.setAttribute("async", "");
+      a.setAttribute("defer", "");
+      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+      document.head.appendChild(a);
+    </script>
+
+    <!-- HERO -->
+    <section
+      class="relative flex items-start justify-center pt-16 sm:pt-18 lg:pt-20 pb-6 px-4 sm:px-6 lg:px-8 overflow-hidden bg-black min-h-[85vh] md:min-h-screen">
+      <div class="absolute inset-0 z-0">
+        <img src="images/iaMeAb7.jpeg" alt="Fundo com personagem de Free Fire"
+          class="w-full h-full object-cover opacity-30 ken-burns">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+      </div>
+
+      <div class="relative max-w-5xl mx-auto text-center z-10">
+
+        <!-- BLOCO DO TÍTULO — SOMENTE DESCE ELE -->
+        <div style="margin-top: 20px;">
+          <h1
+            class="font-teko uppercase font-bold leading-tight text-4xl sm:text-5xl md:text-6xl text-white drop-shadow-lg">
+            <span class="block">PAINEL ZIMO</span>
+            <span class="block text-brand" style="margin-top: -10px;">OFICIAL DOS FAMOSOS</span>
+          </h1>
+
+          <p class="text-xs sm:text-sm md:text-base text-gray-300 mt-3 mb-6 max-w-md mx-auto">
+            Adquira agora o painel dos famosos totalmente<br>liberado pela Garena.
+          </p>
+
+        </div>
+
+        <!-- 🔥 VÍDEO (ANTES DO BOTÃO) -->
+        <div class="elementor-element elementor-element-50c0a598 elementor-widget elementor-widget-html"
+          data-id="50c0a598" data-element_type="widget" data-widget_type="html.default">
+          <div class="elementor-widget-container">
+
+            <div class="vsl-wrap">
+              <div class="video-16x9">
+                <vturb-smartplayer id="vid-69a3417f6d8aeabb2b2079a9"
+                  style="display: block; margin: 0 auto; width: 100%;"></vturb-smartplayer>
+              </div>
+            </div>
+
+            <script type="text/javascript">
+              var s = document.createElement("script");
+              s.src = "https://scripts.converteai.net/256b71b2-4b38-4604-b8ee-044b72c0896c/players/69a3417f6d8aeabb2b2079a9/v4/player.js";
+              s.async = !0;
+              document.head.appendChild(s);
+            </script>
+
+          </div>
+        </div>
+        <!-- 🔥 FIM DO VÍDEO -->
+
+        <style>
+          /* Base */
+          .vsl-wrap {
+            width: 100%;
+            max-width: 640px;
+            /* Expanded for horizontal video */
+            margin: 0 auto;
+          }
+
+          .video-16x9 {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            /* 16:9 landscape ratio */
+            border-radius: 12px;
+            overflow: hidden;
+          }
+
+          .video-16x9 vturb-smartplayer,
+          .video-16x9 iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+          }
+
+          /* MOBILE: ocupa a tela */
+          @media (max-width: 480px) {
+            .vsl-wrap {
+              width: calc(100vw - 32px) !important;
+              max-width: 640px !important;
+              margin-left: auto !important;
+              margin-right: auto !important;
+            }
+          }
+        </style>
+
+
+
+
+
+
+        <!-- BENEFÍCIOS (IMAGEM ÚNICA) -->
+        <div style="
+    width:100%; 
+    text-align:center; 
+    margin-top:6px;   /* MAIS PERTO DO VÍDEO */
+    margin-bottom:18px;
+    position:relative;
+">
+          <img src="images/Design sem nome (38).png" alt="Benefícios" style="
+             width:260px;              /* MENOR */
+             max-width:85%; 
+             display:block;
+             margin:0 auto;
+             transform:translateX(12px);  /* MAIS PARA A DIREITA */
+         ">
+        </div>
+
+
+        <!-- BOTÃO -->
+        <a href="#interactive-panel" class="inline-block btn-brand btn-hero-adjusted rounded-md">
+          VEJA COMO FUNCIONA
+        </a>
+
+      </div>
+      </div>
+
+      </div>
+    </section>
+
+
+
+
+
+    <!-- PAINEL INTERATIVO -->
+    <section id="interactive-panel"
+      class="flex flex-col items-center justify-center mt-1 sm:mt-2 pt-2 pb-12 sm:pt-4 sm:pb-16 px-4 sm:px-6 lg:px-8 bg-black scroll-mt-24">
+      <div class="text-center mb-6 max-w-3xl mx-auto reveal">
+        <h2 class="font-teko text-4xl sm:text-5xl md:text-6xl font-bold text-white uppercase leading-[0.9]">
+          Controle Total na<br>Palma da Sua Mão
+        </h2>
+        <p class="text-base text-gray-400 mt-1">
+          Prove que você é brabo! Complete a<br>
+          <span class="font-bold text-white">Jornada do Capudo</span> e libere uma <span
+            class="font-bold text-brand">oferta</span><br>
+          <span class="font-bold text-brand">secreta</span> só pra você.
+        </p>
+      </div>
+
+      <div id="gamification-progress" class="w-full max-w-3xl mx-auto mb-4 reveal">
+        <div class="flex justify-between items-center mb-1">
+          <p class="font-teko text-lg text-yellow-400 uppercase tracking-wider">Jornada do Capudo</p>
+          <p id="progress-text" class="font-bold text-base text-white">0%</p>
+        </div>
+        <div class="w-full bg-gray-800 rounded-full h-3 border border-gray-700">
+          <div id="progress-bar"
+            class="bg-gradient-to-r from-yellow-500 to-yellow-600 h-full rounded-full progress-bar-inner"
+            style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="w-full max-w-3xl mx-auto mb-6 reveal text-center">
+        <p class="text-gray-400 mb-3 text-sm">Para desbloquear sua recompensa, complete as missões:</p>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-5">
+          <div id="task-1" class="flex items-center gap-2 text-gray-500 transition-colors duration-300">
+            <i class="far fa-circle-check text-xs"></i><span class="font-semibold text-xs">1. Ative o Painel</span>
+          </div>
+          <div id="task-2" class="flex items-center gap-2 text-gray-500 transition-colors duration-300">
+            <i class="far fa-circle-check text-xs"></i><span class="font-semibold text-xs">2. Teste 3 Funções</span>
+          </div>
+          <div id="task-3" class="flex items-center gap-2 text-gray-500 transition-colors duration-300">
+            <i class="far fa-circle-check text-xs"></i><span class="font-semibold text-xs">3. Aplique as
+              Otimizações</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col lg:flex-row items-center justify-center gap-8 w-full max-w-4xl reveal">
+        <!-- Mock do app -->
+        <div id="phone-container" class="phone-frame">
+          <div class="phone-screen font-poppins">
+            <div id="app-dashboard-screen"
+              class="absolute inset-0 p-6 flex flex-col overflow-y-auto custom-scrollbar opacity-100 transition-opacity duration-500">
+              <header class="flex justify-between items-center flex-shrink-0">
+                <img src="images/Design sem nome (68).png" alt="ZIMO Logo" class="h-8">
+                <div class="w-10 h-10 bg-[#1E1E1E] rounded-xl flex items-center justify-center"><i
+                    class="fa-solid fa-ellipsis-vertical text-gray-400"></i></div>
+              </header>
+
+              <div class="text-center my-6 flex-shrink-0">
+                <button id="app-main-toggle-btn"
+                  class="relative w-32 h-32 rounded-full flex items-center justify-center mx-auto cursor-pointer pulse-attention">
+                  <div class="absolute inset-0 rounded-full border-2 ring-brand"></div>
+                  <div
+                    class="w-[90%] h-[90%] bg-gray-800 rounded-full flex items-center justify-center transition-colors duration-300">
+                    <span class="font-teko text-5xl label-brand transition-colors duration-300">OFF</span>
+                  </div>
+                </button>
+              </div>
+
+              <div id="status-indicators"
+                class="my-4 grid grid-cols-3 gap-4 text-center transition-opacity duration-500 opacity-50 flex-shrink-0">
+                <div>
+                  <p data-stat="latency" class="font-teko text-3xl text-gray-500 transition-colors">--</p>
+                  <p class="text-xs text-gray-400">Ping</p>
+                </div>
+                <div>
+                  <p data-stat="fps" class="font-teko text-3xl text-gray-500 transition-colors">--</p>
+                  <p class="text-xs text-gray-400">FPS Estável</p>
+                </div>
+                <div>
+                  <p data-stat="precision" class="font-teko text-3xl text-gray-500 transition-colors">+0%</p>
+                  <p class="text-xs text-gray-400">Taxa de HS</p>
+                </div>
+              </div>
+
+              <div id="quick-functions"
+                class="flex-grow space-y-3 transition-opacity duration-500 opacity-50 pointer-events-none">
+                <h3 class="font-teko text-xl text-gray-400 tracking-wide">Funções Rápidas</h3>
+
+                <div class="bg-gray-800/50 p-3 rounded-lg flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-arrows-to-dot text-brand"></i>
+                    <span class="text-sm font-semibold">Mira Gruda</span>
+                  </div>
+                  <div class="relative inline-block w-10 align-middle">
+                    <input type="checkbox" data-sync="switch-aim-1" id="quick-switch-1"
+                      class="switch-bg w-6 h-6 absolute block rounded-full bg-white border-4 appearance-none cursor-pointer">
+                    <label for="quick-switch-1"
+                      class="switch-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                  </div>
+                </div>
+
+                <div class="bg-gray-800/50 p-3 rounded-lg flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-water text-brand"></i>
+                    <span class="text-sm font-semibold">Só Capa / Anti-Peito</span>
+                  </div>
+                  <div class="relative inline-block w-10 align-middle">
+                    <input type="checkbox" data-sync="switch-aim-6" id="quick-switch-2"
+                      class="switch-bg w-6 h-6 absolute block rounded-full bg-white border-4 appearance-none cursor-pointer">
+                    <label for="quick-switch-2"
+                      class="switch-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                  </div>
+                </div>
+
+                <div class="bg-gray-800/50 p-3 rounded-lg flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-bolt text-brand"></i>
+                    <span class="text-sm font-semibold">FPS no Talo</span>
+                  </div>
+                  <div class="relative inline-block w-10 align-middle">
+                    <input type="checkbox" data-sync="switch-opt-3" id="quick-switch-3"
+                      class="switch-bg w-6 h-6 absolute block rounded-full bg-white border-4 appearance-none cursor-pointer">
+                    <label for="quick-switch-3"
+                      class="switch-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                  </div>
+                </div>
+              </div>
+
+              <footer class="text-center text-gray-600 text-xs font-semibold tracking-wider mt-auto flex-shrink-0">
+                @ZiMO.STOREFF</footer>
+            </div>
+          </div>
+        </div>
+
+        <!-- Painel flutuante -->
+        <div id="app-floating-panel"
+          class="hidden w-full max-w-sm bg-[#1E1E1E] rounded-2xl shadow-2xl z-50 overflow-hidden">
+          <div class="flex h-[460px]">
+            <nav class="w-16 bg-black/20 flex flex-col items-center py-2 space-y-2">
+              <div class="w-12 h-12 flex items-center justify-center text-gray-400"><i
+                  class="fa-solid fa-power-off"></i></div>
+              <div class="w-full h-px bg-gray-700"></div>
+              <button class="app-nav-button active w-12 h-12 flex items-center justify-center text-gray-400"
+                data-page="app-page-settings"><i class="fa-solid fa-cog"></i></button>
+              <button class="app-nav-button w-12 h-12 flex items-center justify-center text-gray-400"
+                data-page="app-page-sensitivity"><i class="fa-solid fa-sliders"></i></button>
+              <button class="app-nav-button w-12 h-12 flex items-center justify-center text-gray-400"
+                data-page="app-page-aim"><i class="fa-solid fa-crosshairs"></i></button>
+              <button class="app-nav-button w-12 h-12 flex items-center justify-center text-gray-400"
+                data-page="app-page-optimization"><i class="fa-solid fa-bolt"></i></button>
+              <button class="app-nav-button w-12 h-12 flex items-center justify-center text-gray-400"
+                data-page="app-page-ia"><i class="fa-solid fa-brain"></i></button>
+            </nav>
+
+            <div class="flex-1 p-4 overflow-y-auto custom-scrollbar">
+              <!-- Settings -->
+              <div id="app-page-settings" class="app-panel-page">
+                <h2 class="font-teko text-2xl">ZIMO <span class="bg-brand text-black text-xs p-1 rounded">v2.0</span>
+                </h2>
+                <p class="text-xs text-gray-400 mb-4">Painel de Controle</p>
+
+                <div class="clickable-function flex items-center gap-3 mb-4 p-2 rounded-lg cursor-pointer">
+                  <div class="w-10 h-10 bg-black/20 rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-ghost text-brand"></i>
+                  </div>
+                  <p class="flex-1 text-sm font-bold">Ícone Flutuante</p>
+                  <div class="relative inline-block w-10 align-middle">
+                    <input type="checkbox" checked id="switch-1"
+                      class="switch-bg w-6 h-6 absolute block rounded-full bg-white border-4 appearance-none cursor-pointer">
+                    <label for="switch-1"
+                      class="switch-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                  </div>
+                </div>
+
+                <div class="clickable-function flex items-center gap-3 mb-4 p-2 rounded-lg cursor-pointer">
+                  <div class="w-10 h-10 bg-black/20 rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-bell text-brand"></i>
+                  </div>
+                  <p class="flex-1 text-sm font-bold">Notificações no Jogo</p>
+                  <div class="relative inline-block w-10 align-middle">
+                    <input type="checkbox" id="switch-2"
+                      class="switch-bg w-6 h-6 absolute block rounded-full bg-white border-4 appearance-none cursor-pointer">
+                    <label for="switch-2"
+                      class="switch-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                  </div>
+                </div>
+
+                <p class="text-sm mt-4 mb-1">Opacidade do Painel</p>
+                <input type="range"
+                  class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-brand">
+              </div>
+
+              <!-- Sensibilidade -->
+              <div id="app-page-sensitivity" class="app-panel-page hidden">
+                <h2 class="bg-brand text-black inline-block text-sm font-bold p-2 rounded-lg mb-4">Sensibilidade</h2>
+
+                <div class="space-y-3">
+                  <div class="bg-black/20 p-2 rounded-lg">
+                    <div class="flex items-center gap-2 mb-1">
+                      <i class="fa-solid fa-crosshairs w-8 text-center text-gray-400"></i>
+                      <p class="flex-1 text-sm">Geral</p>
+                      <p class="text-sm text-brand font-bold" data-sensi-value>100</p>
+                    </div>
+                    <input type="range" value="100" min="0" max="200"
+                      class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-brand sensi-slider">
+                  </div>
+
+                  <div class="bg-black/20 p-2 rounded-lg">
+                    <div class="flex items-center gap-2 mb-1">
+                      <i class="fa-solid fa-circle-dot w-8 text-center text-gray-400"></i>
+                      <p class="flex-1 text-sm">Ponto Vermelho</p>
+                      <p class="text-sm text-brand font-bold" data-sensi-value>95</p>
+                    </div>
+                    <input type="range" value="95" min="0" max="200"
+                      class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-brand sensi-slider">
+                  </div>
+
+                  <div class="bg-black/20 p-2 rounded-lg">
+                    <div class="flex items-center gap-2 mb-1">
+                      <i class="fa-solid fa-2 w-8 text-center text-gray-400"></i>
+                      <p class="flex-1 text-sm">Mira 2x</p>
+                      <p class="text-sm text-brand font-bold" data-sensi-value>90</p>
+                    </div>
+                    <input type="range" value="90" min="0" max="200"
+                      class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-brand sensi-slider">
+                  </div>
+
+                  <div class="bg-black/20 p-2 rounded-lg">
+                    <div class="flex items-center gap-2 mb-1">
+                      <i class="fa-solid fa-4 w-8 text-center text-gray-400"></i>
+                      <p class="flex-1 text-sm">Mira 4x</p>
+                      <p class="text-sm text-brand font-bold" data-sensi-value>85</p>
+                    </div>
+                    <input type="range" value="85" min="0" max="200"
+                      class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-brand sensi-slider">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Funções de Mira -->
+              <div id="app-page-aim" class="app-panel-page hidden">
+                <h2 class="bg-brand text-black inline-block text-sm font-bold p-2 rounded-lg mb-4">Funções de Mira</h2>
+
+                <div class="space-y-3">
+                  <div class="clickable-function flex items-center p-2 rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-arrows-to-dot w-6 text-center text-gray-400"></i>
+                    <p class="flex-1 text-sm ml-2">Mira Gruda</p>
+                    <div class="relative inline-block w-10 align-middle">
+                      <input type="checkbox" data-sync="quick-switch-1" data-gamify-task="aim" data-effect="precision"
+                        data-value="25" id="switch-aim-1"
+                        class="switch-bg w-6 h-6 absolute block rounded-full bg-white border-4 appearance-none cursor-pointer">
+                      <label for="switch-aim-1"
+                        class="switch-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                    </div>
+                  </div>
+
+                  <div class="clickable-function flex items-center p-2 rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-bullseye w-6 text-center text-gray-400"></i>
+                    <p class="flex-1 text-sm ml-2">Mira Travada</p>
+                    <div class="relative inline-block w-10 align-middle">
+                      <input type="checkbox" data-gamify-task="aim" data-effect="precision" data-value="20"
+                        id="switch-aim-2"
+                        class="switch-bg w-6 h-6 absolute block rounded-full bg-white border-4 appearance-none cursor-pointer">
+                      <label for="switch-aim-2"
+                        class="switch-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                    </div>
+                  </div>
+
+                  <div class="clickable-function flex items-center p-2 rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-user-shield w-6 text-center text-gray-400"></i>
+                    <p class="flex-1 text-sm ml-2">Anti-Pinada
+                      <input type="checkbox" data-gamify-task="aim" data-effect="precision" data-value="15"
+                        id="switch-aim-3"
+                        class="switch-bg w-6 h-6 absolute block rounded-full bg-white border-4 appearance-none cursor-pointer">
+                      <label for="switch-aim-3"
+                        class="switch-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                    </p>
+                  </div>
+
+                  <div class="clickable-function flex items-center p-2 rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-expand w-6 text-center text-gray-400"></i>
+                    <p class="flex-1 text-sm ml-2">Aim FOV</p>
+                    <div class="relative inline-block w-10 align-middle">
+                      <input type="checkbox" data-gamify-task="aim" data-effect="precision" data-value="10"
+                        id="switch-aim-4"
+                        class="switch-bg w-6 h-6 absolute block rounded-full bg-white border-4 appearance-none cursor-pointer">
+                      <label for="switch-aim-4"
+                        class="switch-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                    </div>
+                  </div>
+
+                  <div class="clickable-function flex items-center p-2 rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-hand-pointer w-6 text-center text-gray-400"></i>
+                    <p class="flex-1 text-sm ml-2">Puxada Automática</p>
+                    <div class="relative inline-block w-10 align-middle">
+                      <input type="checkbox" data-gamify-task="aim" data-effect="precision" data-value="12"
+                        id="switch-aim-5"
+                        class="switch-bg w-6 h-6 absolute block rounded-full bg-white border-4 appearance-none cursor-pointer">
+                      <label for="switch-aim-5"
+                        class="switch-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                    </div>
+                  </div>
+
+                  <div class="clickable-function flex items-center p-2 rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-water w-6 text-center text-gray-400"></i>
+                    <p class="flex-1 text-sm ml-2">Só Capa / Anti-Peito</p>
+                    <div class="relative inline-block w-10 align-middle">
+                      <input type="checkbox" data-sync="quick-switch-2" data-gamify-task="aim" data-effect="precision"
+                        data-value="10" id="switch-aim-6"
+                        class="switch-bg w-6 h-6 absolute block rounded-full bg-white border-4 appearance-none cursor-pointer">
+                      <label for="switch-aim-6"
+                        class="switch-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Otimização -->
+              <div id="app-page-optimization" class="app-panel-page hidden">
+                <h2 class="bg-brand text-black inline-block text-sm font-bold p-2 rounded-lg mb-4">Otimização de Jogo
+                </h2>
+
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                  <div class="clickable-function bg-black/20 p-2 rounded-lg cursor-pointer">
+                    <p class="font-bold">Otimizar Ping</p>
+                    <p class="text-gray-400">Reduzir lag.</p>
+                    <div class="text-right mt-1">
+                      <div class="relative inline-block w-8 align-middle">
+                        <input type="checkbox" data-effect="latency" data-value="-28" id="switch-opt-1"
+                          class="switch-bg w-5 h-5 absolute block rounded-full bg-white border-2 appearance-none cursor-pointer">
+                        <label for="switch-opt-1"
+                          class="switch-label block overflow-hidden h-5 rounded-full bg-gray-700 cursor-pointer"></label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="clickable-function bg-black/20 p-2 rounded-lg cursor-pointer">
+                    <p class="font-bold">Limpar Cache</p>
+                    <p class="text-gray-400">Libertar memória.</p>
+                    <div class="text-right mt-1">
+                      <div class="relative inline-block w-8 align-middle">
+                        <input type="checkbox" id="switch-opt-2"
+                          class="switch-bg w-5 h-5 absolute block rounded-full bg-white border-2 appearance-none cursor-pointer">
+                        <label for="switch-opt-2"
+                          class="switch-label block overflow-hidden h-5 rounded-full bg-gray-700 cursor-pointer"></label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="clickable-function bg-black/20 p-2 rounded-lg cursor-pointer">
+                    <p class="font-bold">FPS no Talo</p>
+                    <p class="text-gray-400">Jogo mais liso.</p>
+                    <div class="text-right mt-1">
+                      <div class="relative inline-block w-8 align-middle">
+                        <input type="checkbox" data-sync="quick-switch-3" data-effect="fps" data-value="45"
+                          id="switch-opt-3"
+                          class="switch-bg w-5 h-5 absolute block rounded-full bg-white border-2 appearance-none cursor-pointer">
+                        <label for="switch-opt-3"
+                          class="switch-label block overflow-hidden h-5 rounded-full bg-gray-700 cursor-pointer"></label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="clickable-function bg-black/20 p-2 rounded-lg cursor-pointer">
+                    <p class="font-bold">Modo Performance</p>
+                    <p class="text-gray-400">Acelerar CPU.</p>
+                    <div class="text-right mt-1">
+                      <div class="relative inline-block w-8 align-middle">
+                        <input type="checkbox" data-effect="fps" data-value="15" id="switch-opt-4"
+                          class="switch-bg w-5 h-5 absolute block rounded-full bg-white border-2 appearance-none cursor-pointer">
+                        <label for="switch-opt-4"
+                          class="switch-label block overflow-hidden h-5 rounded-full bg-gray-700 cursor-pointer"></label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="clickable-function bg-black/20 p-2 rounded-lg cursor-pointer">
+                    <p class="font-bold">Anti-Aquecimento</p>
+                    <p class="text-gray-400">Resfriar CPU.</p>
+                    <div class="text-right mt-1">
+                      <div class="relative inline-block w-8 align-middle">
+                        <input type="checkbox" id="switch-opt-5"
+                          class="switch-bg w-5 h-5 absolute block rounded-full bg-white border-2 appearance-none cursor-pointer">
+                        <label for="switch-opt-5"
+                          class="switch-label block overflow-hidden h-5 rounded-full bg-gray-700 cursor-pointer"></label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="clickable-function bg-black/20 p-2 rounded-lg cursor-pointer">
+                    <p class="font-bold">Economia de Bateria</p>
+                    <p class="text-gray-400">Melhorar duração.</p>
+                    <div class="text-right mt-1">
+                      <div class="relative inline-block w-8 align-middle">
+                        <input type="checkbox" id="switch-opt-6"
+                          class="switch-bg w-5 h-5 absolute block rounded-full bg-white border-2 appearance-none cursor-pointer">
+                        <label for="switch-opt-6"
+                          class="switch-label block overflow-hidden h-5 rounded-full bg-gray-700 cursor-pointer"></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button id="apply-optimization-btn"
+                  class="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold text-sm p-2 rounded-lg mt-4 transition-colors duration-300">APLICAR
+                  OTIMIZAÇÕES</button>
+              </div>
+
+              <!-- IA -->
+              <div id="app-page-ia" class="app-panel-page hidden">
+                <h2 class="bg-brand text-black inline-block text-sm font-bold p-2 rounded-lg mb-4">IA Otimizadora</h2>
+                <div class="space-y-4">
+                  <div>
+                    <label for="phone-model" class="block text-xs font-medium text-gray-300 mb-1">1. Modelo do seu
+                      celular:</label>
+                    <input type="text" id="phone-model"
+                      class="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white text-sm focus-ring-brand"
+                      placeholder="Ex: iPhone 8">
+                  </div>
+                  <div>
+                    <label for="game-mode" class="block text-xs font-medium text-gray-300 mb-1">2. Estilo de
+                      jogo?</label>
+                    <select id="game-mode"
+                      class="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white text-sm focus-ring-brand">
+                      <option value="">Selecione...</option>
+                      <option value="rush">X1 / Apostado (Rush)</option>
+                      <option value="control">Rankeada (Controle)</option>
+                    </select>
+                  </div>
+                  <button id="generate-config-button"
+                    class="w-full btn-brand py-2 px-3 rounded-lg transition-all duration-300">
+                    <i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Gerar Configuração
+                  </button>
+                  <div id="ai-result"
+                    class="hidden mt-4 p-3 bg-gray-800/50 border border-gray-700 rounded-lg text-sm space-y-2"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- /Painel flutuante -->
+      </div>
+    </section>
+
+    <!-- RECOMENDADA POR PERFIS VERIFICADOS -->
+    <section id="bonus-recomendados" class="py-12 sm:py-16 px-4 bg-[#150424] border-y border-[#6513B1] text-center">
+
+      <div class="max-w-3xl mx-auto">
+        <h2 class="font-teko text-2xl sm:text-3xl md:text-4xl font-bold uppercase text-white leading-tight mb-2">
+          RECOMENDADA POR <span class="text-[#9333ea]">PERFIS VERIFICADOS</span>
+        </h2>
+        <p class="text-gray-200 text-xs sm:text-sm mb-6">
+          Alguns dos nomes do Free Fire que usam nosso xit
+        </p>
+      </div>
+
+      <div class="relative max-w-[280px] mx-auto">
+
+        <!-- SLIDES -->
+        <div id="slider" class="overflow-hidden rounded-xl">
+          <div class="slide active">
+            <img src="images/player-4.jpeg" class="w-full rounded-xl" alt="Marechal">
+            <p class="text-white font-semibold text-lg mt-2">Marechal</p>
+          </div>
+
+          <div class="slide">
+            <img src="images/Design sem nome (23).png" class="w-full rounded-xl" alt="Fantasma">
+            <p class="text-white font-semibold text-lg mt-2">Steike</p>
+          </div>
+
+          <div class="slide">
+            <img src="images/player-2.jpeg" class="w-full rounded-xl" alt="Steike">
+            <p class="text-white font-semibold text-lg mt-2">Fantasma</p>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img src="images/Design sem nome (21).png" class="w-full rounded-xl" alt="Novo Jogador">
+          <p class="text-white font-semibold text-lg mt-2">Deusa FF</p>
+        </div>
+
+        <div class="slide">
+          <img src="images/Design sem nome (24).png" class="w-full rounded-xl" alt="Novo Jogador">
+          <p class="text-white font-semibold text-lg mt-2">TWO 9</p>
+        </div>
+
+
+        <!-- SETA ESQUERDA -->
+        <button id="prev" class="absolute left-[-22px] top-1/2 -translate-y-1/2
+                   bg-black/60 text-white w-9 h-9 rounded-full flex 
+                   items-center justify-center hover:bg-black/80 transition">
+          <span class="text-lg">❮</span>
+        </button>
+
+        <!-- SETA DIREITA -->
+        <button id="next" class="absolute right-[-22px] top-1/2 -translate-y-1/2
+                   bg-black/60 text-white w-9 h-9 rounded-full flex 
+                   items-center justify-center hover:bg-black/80 transition">
+          <span class="text-lg">❯</span>
+        </button>
+      </div>
+      </a>
+    </section>
+
+    <!-- FEEDBACK -->
+    <section id="feedback" class="relative py-12 sm:py-14 px-4 sm:px-6 lg:px-8 overflow-hidden bg-black">
+      <div class="absolute inset-0 z-0">
+        <img src="https://i.imgur.com/b42e8755a1fd0f7ce699f70bf8b6030a.jpg" alt="Fundo de Feedback"
+          class="w-full h-full object-cover opacity-10 ken-burns">
+        <div class="absolute inset-0 bg-black/80"></div>
+      </div>
+
+      <div class="relative max-w-7xl mx-auto z-10 reveal">
+        <div class="text-center mb-10 sm:mb-12">
+          <p class="font-teko text-lg text-brand mb-1 uppercase tracking-widest">A Tropa Não Mente</p>
+          <h2 class="font-teko text-3xl sm:text-4xl font-bold text-white uppercase leading-[0.9] sm:leading-[0.9]">
+            RESULTADOS REAIS,<br>JOGADORES REAIS
+          </h2>
+          <p class="text-sm text-gray-400 max-w-3xl mx-auto mt-2">
+            Se liga no que a galera tá falando depois de Ativar o Painel. O resultado é na hora, sem enrolação.
+          </p>
+        </div>
+
+        <!-- CARROSSEL -->
+        <div class="relative max-w-[320px] sm:max-w-[340px] mx-auto">
+
+          <!-- Área visível do carrossel -->
+          <div id="feedback-slider" class="overflow-hidden rounded-xl bg-black/60 border border-gray-800">
+
+            <!-- SLIDE 1 - VÍDEO -->
+            <div class="fb-slide p-4">
+              <video class="rounded-lg mx-auto" style="width:85%;height:auto;" controls playsinline preload="metadata"
+                poster="images/video1.png">
+                <source src="images/video3.mp4" type="video/mp4">
+                Seu navegador não suporta vídeo.
+              </video>
+            </div>
+
+            <!-- SLIDE 2 - VÍDEO -->
+            <div class="fb-slide p-4 hidden">
+              <video class="rounded-lg mx-auto" style="width:85%;height:auto;" controls playsinline preload="metadata"
+                poster="images/capa2.png">
+                <source src="images/video2.mp4" type="video/mp4">
+                Seu navegador não suporta vídeo.
+              </video>
+            </div>
+
+            <!-- SLIDE 3 - VÍDEO -->
+            <div class="fb-slide p-4 hidden">
+              <video class="rounded-lg mx-auto" style="width:85%;height:auto;" controls playsinline preload="metadata"
+                poster="images/capa3.png">
+                <source src="images/video3.mp4" type="video/mp4">
+                Seu navegador não suporta vídeo.
+              </video>
+            </div>
+
+
+            <!-- SLIDE 4 - IMAGEM -->
+            <div class="fb-slide p-4 hidden">
+              <img src="images/prova2.jpeg" class="w-[85%] mx-auto h-auto rounded-lg" alt="Feedback 2">
+            </div>
+
+            <!-- SLIDE 5 - IMAGEM -->
+            <div class="fb-slide p-4 hidden">
+              <img src="images/prova3.jpeg" class="w-[85%] mx-auto h-auto rounded-lg" alt="Feedback 3">
+            </div>
+
+            <!-- SLIDE 6 - IMAGEM -->
+            <div class="fb-slide p-4 hidden">
+              <img src="images/prova1.webp" class="w-full h-auto rounded-lg" alt="Feedback 4">
+            </div>
+
+            <!-- SLIDE 7 - IMAGEM -->
+            <div class="fb-slide p-4 hidden">
+              <img src="images/prova4.webp" class="w-full h-auto rounded-lg" alt="Feedback 5">
+            </div>
+
+            <!-- SLIDE 8 - IMAGEM -->
+            <div class="fb-slide p-4 hidden">
+              <img src="images/prova6.jpg" class="w-full h-auto rounded-lg" alt="Feedback 6">
+            </div>
+
+          </div>
+
+          <!-- SETAS (apenas UMA vez) -->
+          <button id="prev-slide"
+            class="absolute top-1/2 -left-4 md:-left-6 transform -translate-y-1/2 bg-gray-800/50 text-white p-3 rounded-full transition-all duration-300 z-10">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button id="next-slide"
+            class="absolute top-1/2 -right-4 md:-right-6 transform -translate-y-1/2 bg-gray-800/50 text-white p-3 rounded-full transition-all duration-300 z-10">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Pontinhos embaixo (APENAS UMA VEZ) -->
+        <div id="carousel-dots" class="mt-8 text-center flex justify-center space-x-2"></div>
+
+        <div class="text-center mt-10 reveal">
+          <a href="#planos"
+            class="inline-block btn-brand px-8 sm:px-10 py-3 sm:py-4 rounded-md text-lg sm:text-xl font-bold">
+            ESTOU PRONTO PARA DOMINAR
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- PLANOS -->
+    <section id="planos" class="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-black">
+      <div class="max-w-5xl mx-auto reveal">
+        <div class="text-center mb-10 sm:mb-12">
+          <p class="font-teko text-xl text-brand mb-2 uppercase tracking-widest">Oferta Exclusiva</p>
+          <h2 class="font-teko text-3xl sm:text-4xl md:text-5xl font-bold text-white uppercase">
+            Acesso Liberado para Você
+          </h2>
+          <p class="text-base text-gray-400 max-w-3xl mx-auto mt-4">
+            Escolha o plano que melhor se encaixa na sua jornada para o topo e domine os campos de batalha hoje mesmo.
+          </p>
+        </div>
+
+        <!-- agora só 2 colunas no desktop -->
+        <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+
+          <!-- Mensal -->
+          <div class="bg-gray-900/50 border border-gray-800 p-6 text-center h-full flex flex-col rounded-2xl"
+            data-plan-name="Plano Mensal" data-plan-value="9.99">
+            <h3 class="font-teko text-2xl sm:text-3xl font-bold text-white uppercase">Plano Mensal</h3>
+            <p class="text-gray-400 mb-4 text-sm">Acesso por 30 dias</p>
+            <p class="font-teko text-5xl sm:text-6xl font-bold text-white mb-6">
+              R$9<span class="text-3xl text-gray-400">,99</span>
+            </p>
+            <div class="border-t border-gray-800 my-6"></div>
+
+            <ul class="space-y-2 text-gray-400 mb-6 text-left flex-grow text-xs">
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Função HS Alto</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Função HS Pescoço</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Função HS Peito</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Bypass para Transmitir Tela</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Anti-Ban</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Anti Blacklist</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Função Booyah no Lobby</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Função para Pegar Top Global</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Função 100% HS</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Função Correr Rápido</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Função Atravessar Parede</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Função Matar Atrás do Gelo</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Aimbot</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>No Recoil</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Grupo VIP no Discord</span>
+              </li>
+            </ul>
+
+            <a href="#" class="purchase-link w-full mt-auto inline-block text-center
+                  bg-gray-800 hover:bg-gray-700 text-white px-5 py-3 rounded-lg font-bold text-sm">
+              ESCOLHER PLANO
+            </a>
+          </div>
+
+          <!-- Permanente -->
+          <div id="vitalicio-plan-card" class="bg-gradient-to-b from-[rgba(101,19,177,.15)] to-gray-900/50 border-2 border-brand
+                  p-6 text-center relative transform lg:scale-105 h-full flex flex-col rounded-2xl shadow-brand"
+            data-plan-name="Plano Anual" data-plan-value="37.00">
+
+            <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
+              <span class="inline-block px-5 py-1.5 text-xs text-black bg-brand rounded-full
+                       font-bold uppercase tracking-wider shadow-lg">
+                MAIS VENDIDO
+              </span>
+            </div>
+
+            <h3 class="font-teko text-2xl sm:text-3xl font-bold text-white uppercase">Plano Anual</h3>
+            <p class="text-brand mb-4 text-sm">Pague uma vez, e tenha acesso por um ano inteiro</p>
+
+            <div id="vitalicio-price-container">
+              <p class="font-teko text-5xl sm:text-6xl font-bold text-white mb-6">
+                R$37<span class="text-3xl text-brand">,00</span>
+              </p>
+            </div>
+
+            <div class="border-t" style="border-color: rgba(101,19,177,.3)"></div>
+
+            <ul class="space-y-2 text-gray-300 mb-6 text-left flex-grow mt-4 text-xs">
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Tudo do Plano Básico incluso</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>30 dias de garantia</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Todas as atualizações inclusas</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Painel ZIMO</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Suporte em call</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Acesso por um ano</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Função anti–telamento</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Bypass Android/iOS</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>+ 30 funções adicionais</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Painel de otimização 240 FPS</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Funções de HS pescoço/peito</span>
+              </li>
+
+              <li class="flex items-center">
+                <i class="fa-solid fa-check text-brand w-4 mr-2"></i>
+                <span>Grupo VIP no Discord</span>
+              </li>
+
+
+            </ul>
+
+            <a id="vitalicio-checkout-link" href="#"
+              class="purchase-link w-full mt-auto inline-block text-center btn-brand px-5 py-3 rounded-lg font-bold text-sm transform hover:scale-105">
+              ATIVAR MODO CAPUDO!
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+    <!-- VÍDEO MOSTRANDO O XIT NA PRÁTICA -->
+    <section class="py-12 sm:py-16 px-4 bg-black text-center">
+      <div class="max-w-3xl mx-auto">
+        <h2
+          class="font-teko text-[34px] sm:text-[42px] md:text-[50px] font-bold text-white uppercase leading-tight mb-4">
+          O SEU <span style="color:#6513B1;">XIT</span> IRÁ FUNCIONAR<br>
+          ASSIM APÓS PAGAMENTO
+        </h2>
+      </div>
+
+      <div class="vsl-wrap-2">
+        <div class="video-16x9-2">
+          <vturb-smartplayer id="vid-69800d9f76ae9d6f4de22250"></vturb-smartplayer>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+        (function () {
+          if (window.__vturb_player_69800d9f76ae9d6f4de22250_loaded) return;
+          window.__vturb_player_69800d9f76ae9d6f4de22250_loaded = true;
+
+          var s = document.createElement("script");
+          s.src = "https://scripts.converteai.net/4f1a052d-a90e-42b3-906d-f6a1a187abd2/players/69800d9f76ae9d6f4de22250/v4/player.js";
+          s.async = true;
+          document.head.appendChild(s);
+        })();
+      </script>
+    </section>
+
+    <style>
+      .vsl-wrap-2 {
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto;
+      }
+
+      .video-16x9-2 {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      /* AQUI é o pulo do gato */
+      .video-16x9-2 vturb-smartplayer {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    </style>
+
+
+
+
+    <!-- POR QUE O PAINEL FFH4X OFICIAL É DIFERENCIADO? -->
+    <section id="interactive-panel" class="py-12 sm:py-16 px-4 bg-black overflow-hidden scroll-mt-20">
+      <div class="max-w-4xl mx-auto text-center mb-8 sm:mb-12 reveal">
+        <h2 class="font-teko text-3xl sm:text-4xl font-bold text-white uppercase leading-tight">
+          POR QUE O PAINEL OFICIAL<br>
+          DA <span class="text-brand">ZIMO</span> É DIFERENTE?
+        </h2>
+        <p class="mt-2 text-xs sm:text-sm text-gray-400 max-w-xl mx-auto uppercase tracking-widest">
+          VEJA A SIMULAÇÃO DO NOSSO APP EM AÇÃO
+        </p>
+      </div>
+
+      <!-- Container do "App" simulado -->
+      <div class="relative max-w-[340px] sm:max-w-md mx-auto reveal">
+        <!-- DESKTOP / TABLET: CARDS LADO A LADO (6 ITENS) -->
+        <div class="hidden md:grid max-w-5xl mx-auto grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- CARD 1 -->
+          <div
+            class="bg-[#0b0b0b] border border-[#6513B1] rounded-2xl px-6 py-6 text-center flex flex-col items-center">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-black/60 border border-[#6513B1] mb-4">
+              <i class="fa-solid fa-shield-halved text-brand text-lg"></i>
+            </div>
+            <h3 class="font-teko text-xl text-white mb-2">Anti-Ban &amp; Anti-Black</h3>
+            <p class="text-sm text-gray-300">
+              Jogue sem medo com nossa tecnologia de proteção avançada.
+            </p>
+          </div>
+
+          <!-- CARD 2 -->
+          <div
+            class="bg-[#0b0b0b] border border-[#6513B1] rounded-2xl px-6 py-6 text-center flex flex-col items-center">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-black/60 border border-[#6513B1] mb-4">
+              <i class="fa-solid fa-layer-group text-brand text-lg"></i>
+            </div>
+            <h3 class="font-teko text-xl text-white mb-2">Bypass Incluso</h3>
+            <p class="text-sm text-gray-300">
+              Jogue com tela transmitida sem medo, com o xit totalmente oculto.
+            </p>
+          </div>
+
+          <!-- CARD 3 -->
+          <div
+            class="bg-[#0b0b0b] border border-[#6513B1] rounded-2xl px-6 py-6 text-center flex flex-col items-center">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-black/60 border border-[#6513B1] mb-4">
+              <i class="fa-solid fa-headset text-brand text-lg"></i>
+            </div>
+            <h3 class="font-teko text-xl text-white mb-2">Adms que Passam Pano</h3>
+            <p class="text-sm text-gray-300">
+              Lista de adms confiáveis pra você jogar apostado com segurança.
+            </p>
+          </div>
+
+          <!-- CARD 4 – Funções de 100% HS -->
+          <div
+            class="bg-[#0b0b0b] border border-[#6513B1] rounded-2xl px-6 py-6 text-center flex flex-col items-center">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-black/60 border border-[#6513B1] mb-4">
+              <i class="fa-solid fa-bullseye text-brand text-lg"></i>
+            </div>
+            <h3 class="font-teko text-xl text-white mb-2">Funções de 100% HS</h3>
+            <p class="text-sm text-gray-300">
+              Contamos com diversas funções, desde a capa automática até voar.
+            </p>
+          </div>
+
+          <!-- CARD 5 – Compatível -->
+          <div
+            class="bg-[#0b0b0b] border border-[#6513B1] rounded-2xl px-6 py-6 text-center flex flex-col items-center">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-black/60 border border-[#6513B1] mb-4">
+              <i class="fa-solid fa-mobile-screen-button text-brand text-lg"></i>
+            </div>
+            <h3 class="font-teko text-xl text-white mb-2">Compatível</h3>
+            <p class="text-sm text-gray-300">
+              Compatível com qualquer tipo de dispositivo, Android e iOS.
+            </p>
+          </div>
+
+          <!-- CARD 6 – Suporte Dedicado -->
+          <div
+            class="bg-[#0b0b0b] border border-[#6513B1] rounded-2xl px-6 py-6 text-center flex flex-col items-center">
+            <div
+              class="w-10 h-10 flex items-center justify-center rounded-full bg-black/60 border border-[#6513B1] mb-4">
+              <i class="fa-solid fa-headphones-simple text-brand text-lg"></i>
+            </div>
+            <h3 class="font-teko text-xl text-white mb-2">Suporte Dedicado</h3>
+            <p class="text-sm text-gray-300">
+              Receba suporte dedicado 24/7, ex.: instalação do xit via call Discord.
+            </p>
+          </div>
+        </div>
+
+        <!-- MOBILE: CARROSSEL COM 1 CARD POR VEZ -->
+        <div class="md:hidden mt-8 max-w-xs mx-auto relative">
+          <div id="why-slider" class="overflow-hidden rounded-2xl">
+            <!-- SLIDE 1 -->
+            <div class="why-card-slide bg-[#0b0b0b] border border-[#6513B1] rounded-2xl px-6 py-6 text-center">
+              <div
+                class="w-10 h-10 mx-auto flex items-center justify-center rounded-full bg-black/60 border border-[#6513B1] mb-4">
+                <i class="fa-solid fa-shield-halved text-brand text-lg"></i>
+              </div>
+              <h3 class="font-teko text-xl text-white mb-2">Anti-Ban &amp; Anti-Black</h3>
+              <p class="text-sm text-gray-300">
+                Jogue sem medo com nossa tecnologia de proteção avançada.
+              </p>
+            </div>
+
+            <!-- SLIDE 2 -->
+            <div class="why-card-slide bg-[#0b0b0b] border border-[#6513B1] rounded-2xl px-6 py-6 text-center hidden">
+              <div
+                class="w-10 h-10 mx-auto flex items-center justify-center rounded-full bg-black/60 border border-[#6513B1] mb-4">
+                <i class="fa-solid fa-layer-group text-brand text-lg"></i>
+              </div>
+              <h3 class="font-teko text-xl text-white mb-2">Bypass Incluso</h3>
+              <p class="text-sm text-gray-300">
+                Jogue com tela transmitida sem medo, com o xit totalmente oculto.
+              </p>
+            </div>
+
+            <!-- SLIDE 3 -->
+            <div class="why-card-slide bg-[#0b0b0b] border border-[#6513B1] rounded-2xl px-6 py-6 text-center hidden">
+              <div
+                class="w-10 h-10 mx-auto flex items-center justify-center rounded-full bg-black/60 border border-[#6513B1] mb-4">
+                <i class="fa-solid fa-headset text-brand text-lg"></i>
+              </div>
+              <h3 class="font-teko text-xl text-white mb-2">Adms que Passam Pano</h3>
+              <p class="text-sm text-gray-300">
+                Lista de adms confiáveis pra você jogar apostado com segurança.
+              </p>
+            </div>
+
+            <!-- SLIDE 4 – Funções de 100% HS -->
+            <div class="why-card-slide bg-[#0b0b0b] border border-[#6513B1] rounded-2xl px-6 py-6 text-center hidden">
+              <div
+                class="w-10 h-10 mx-auto flex items-center justify-center rounded-full bg-black/60 border border-[#6513B1] mb-4">
+                <i class="fa-solid fa-bullseye text-brand text-lg"></i>
+              </div>
+              <h3 class="font-teko text-xl text-white mb-2">Funções de 100% HS</h3>
+              <p class="text-sm text-gray-300">
+                Contamos com diversas funções, desde a capa automática até voar.
+              </p>
+            </div>
+
+            <!-- SLIDE 5 – Compatível -->
+            <div class="why-card-slide bg-[#0b0b0b] border border-[#6513B1] rounded-2xl px-6 py-6 text-center hidden">
+              <div
+                class="w-10 h-10 mx-auto flex items-center justify-center rounded-full bg-black/60 border border-[#6513B1] mb-4">
+                <i class="fa-solid fa-mobile-screen-button text-brand text-lg"></i>
+              </div>
+              <h3 class="font-teko text-xl text-white mb-2">Compatível</h3>
+              <p class="text-sm text-gray-300">
+                Compatível com qualquer tipo de dispositivo, Android e iOS.
+              </p>
+            </div>
+
+            <!-- SLIDE 6 – Suporte Dedicado -->
+            <div class="why-card-slide bg-[#0b0b0b] border border-[#6513B1] rounded-2xl px-6 py-6 text-center hidden">
+              <div
+                class="w-10 h-10 mx-auto flex items-center justify-center rounded-full bg-black/60 border border-[#6513B1] mb-4">
+                <i class="fa-solid fa-headphones-simple text-brand text-lg"></i>
+              </div>
+              <h3 class="font-teko text-xl text-white mb-2">Suporte Dedicado</h3>
+              <p class="text-sm text-gray-300">
+                Receba suporte dedicado 24/7, ex.: instalação do xit via call Discord.
+              </p>
+            </div>
+          </div>
+
+          <!-- SETAS -->
+          <button id="why-prev" class="absolute left-3 top-1/2 -translate-y-1/2
+                     w-9 h-9 rounded-full bg-black/70 border border-[#6513B1]
+                     flex items-center justify-center text-white text-lg">
+            ❮
+          </button>
+          <button id="why-next" class="absolute right-3 top-1/2 -translate-y-1/2
+                     w-9 h-9 rounded-full bg-black/70 border border-[#6513B1]
+                     flex items-center justify-center text-white text-lg">
+            ❯
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <!-- GARANTIA -->
+    <section class="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gray-950/50 border-y border-gray-800">
+      <div class="max-w-4xl mx-auto text-center reveal">
+        <div class="relative w-24 h-24 mx-auto mb-6">
+          <svg class="absolute inset-0 w-full h-full spin-slow text-brand" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <div class="absolute inset-0 flex items-center justify-center font-teko text-white text-4xl">7</div>
+        </div>
+        <h2 class="font-teko text-3xl sm:text-4xl font-bold text-white uppercase">
+          Seu Risco é Absolutamente Zero
+        </h2>
+        <p class="text-base text-gray-400 max-w-3xl mx-auto mt-4">
+          Temos total confiança de que nosso Painel ZIMO vai transformar sua jogabilidade. Por isso, te damos 7 dias de
+          garantia incondicional. Se você não sentir uma melhora absurda na sua mira ou não ficar satisfeito por
+          qualquer motivo, é só pedir o reembolso e nós devolvemos 100% do seu dinheiro.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-black">
+      <div class="max-w-4xl mx-auto reveal">
+        <div class="text-center mb-10 sm:mb-12">
+          <p class="font-teko text-xl text-brand mb-2 uppercase tracking-widest">Tire Suas Dúvidas</p>
+          <h2 class="font-teko text-3xl sm:text-4xl md:text-5xl font-bold text-white uppercase">
+            Perguntas Frequentes
+          </h2>
+        </div>
+        <div id="faq-container" class="space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="relative py-20 px-4 sm:px-6 lg:px-8 bg-gray-950/70">
+      <div class="absolute inset-0 z-0">
+        <img src="images/AqCgJZb.jpeg" alt="Fundo da chamada para ação final"
+          class="w-full h-full object-cover opacity-30 ken-burns">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-black"></div>
+      </div>
+      <div class="relative z-10 max-w-4xl mx-auto text-center reveal">
+        <h2 class="font-teko text-3xl md:text-5xl font-bold text-white uppercase">
+          Pronto para ter a melhor mira?
+        </h2>
+        <p class="text-sm text-gray-400 mt-2 mb-8 max-w-lg mx-auto">
+          Chega de ficar para trás. Dê a si mesmo a vantagem que você merece e comece a amassar nas ranqueadas hoje
+          mesmo.
+        </p>
+        <a href="#planos" class="inline-block btn-brand px-6 py-2.5 rounded-md text-base font-bold">
+          ESCOLHER MEU PLANO AGORA
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-8 border-t border-gray-800 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+      <img src="images/Design sem nome (68).png" alt="Logo ZIMO" class="mx-auto mb-4 h-12 w-auto">
+      <p>© 2026 Painel ZIMO. Todos os direitos reservados.</p>
+      <p class="text-xs mt-2">Este produto não tem vínculo com a Garena. É uma ferramenta externa que melhora sua
+        jogabilidade e não viola os termos de serviço do jogo.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js?v=2" defer></script>
+
+
+
+  <style>
+    #top-header-ffh4x {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      padding: 14px 0;
+      /* um pouco mais de respiro */
+    }
+
+    #top-header-ffh4x-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top-header-logo {
+      height: 54px;
+      /* AUMENTEI mais a logo */
+    }
+
+    .top-header-lang {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      /* espaço um pouco maior */
+    }
+
+    .top-header-flag {
+      width: 48px;
+      /* bandeiras maiores ainda */
+      height: auto;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    /* BOTÃO MAIOR + MAIS ESPAÇO EM CIMA */
+    .btn-hero-adjusted {
+      padding: 16px 38px !important;
+      /* aumenta o botão */
+      font-size: 1.25rem !important;
+      /* texto maior */
+      margin-top: 22px !important;
+      /* afasta da imagem */
+    }
+
+    .slide {
+      display: none;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .slide.active {
+      display: block;
+      opacity: 1;
+    }
+  </style>
+
+
+  <script>
+    let index = 0;
+    const slides = document.querySelectorAll(".slide");
+
+    document.getElementById("next").onclick = () => {
+      slides[index].classList.remove("active");
+      index = (index + 1) % slides.length;
+      slides[index].classList.add("active");
+    };
+
+    document.getElementById("prev").onclick = () => {
+      slides[index].classList.remove("active");
+      index = (index - 1 + slides.length) % slides.length;
+      slides[index].classList.add("active");
+    };
+  </script>
+
+
+  <style>
+    /* 🔍 Deixar as provas sociais grandes e legíveis no mobile */
+    #feedback #carousel-content {
+      padding: 0 12px;
+      align-items: stretch;
+    }
+
+    /* Cada slide ocupa 100% da largura do celular */
+    #feedback #carousel-content>div {
+      min-width: 100%;
+      max-width: 100%;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Print do Whats ocupa a largura toda do card */
+    #feedback #carousel-content img {
+      width: 100% !important;
+      max-width: 100% !important;
+      border-radius: 0.75rem;
+      display: block;
+    }
+
+    /* Texto um pouco maior pra leitura ficar boa */
+    #feedback #carousel-content p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* No desktop, limita pra não ficar gigante demais */
+    @media (min-width: 768px) {
+      #feedback #carousel-content>div {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+    }
+
+    /* Se em algum card eu tiver usado max-w-sm/w-72, força a expandir */
+    #feedback #carousel-content .max-w-sm {
+      max-width: 100% !important;
+    }
+
+    #feedback #carousel-content .w-72 {
+      width: 100% !important;
+    }
+  </style>
+
+
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const slides = document.querySelectorAll('.fb-slide');
+      const prevBtn = document.getElementById('prev-slide');
+      const nextBtn = document.getElementById('next-slide');
+      const dotsContainer = document.getElementById('carousel-dots');
+
+      if (!slides.length || !prevBtn || !nextBtn || !dotsContainer) return;
+
+      let current = 0;
+
+      // cria os pontinhos
+      slides.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.className = 'w-2.5 h-2.5 rounded-full bg-gray-600';
+        if (index === 0) dot.classList.add('bg-brand');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = dotsContainer.querySelectorAll('button');
+
+      function updateView() {
+        slides.forEach((slide, index) => {
+          slide.classList.toggle('hidden', index !== current);
+        });
+
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('bg-brand', index === current);
+          dot.classList.toggle('bg-gray-600', index !== current);
+        });
+      }
+
+      function goToSlide(index) {
+        const total = slides.length;
+        current = (index + total) % total; // volta pro último/primeiro quando passa dos limites
+        updateView();
+      }
+
+      prevBtn.addEventListener('click', () => goToSlide(current - 1));
+      nextBtn.addEventListener('click', () => goToSlide(current + 1));
+
+      // inicia certo
+      updateView();
+    });
+  </script>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const slides = document.querySelectorAll('#why-slider .why-card-slide');
+      const prev = document.getElementById('why-prev');
+      const next = document.getElementById('why-next');
+
+      if (!slides.length || !prev || !next) return;
+
+      let current = 0;
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('hidden', i !== index);
+        });
+      }
+
+      prev.addEventListener('click', function () {
+        current = (current - 1 + slides.length) % slides.length;
+        showSlide(current); pe
+      });
+
+      next.addEventListener('click', function () {
+        current = (current + 1) % slides.length;
+        showSlide(current);
+      });
+
+      // inicia no primeiro
+      showSlide(current);
+    });
+  </script>
+
+
+
+  <script>!function (i, n) { i._plt = i._plt || (n && n.timeOrigin ? n.timeOrigin + n.now() : Date.now()) }(window, performance);</script>
+  <link rel="preload"
+    href="https://scripts.converteai.net/4f1a052d-a90e-42b3-906d-f6a1a187abd2/players/69800d9f76ae9d6f4de22250/v4/player.js"
+    as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="preload"
+    href="https://cdn.converteai.net/4f1a052d-a90e-42b3-906d-f6a1a187abd2/69800d90108f9afb7787bff6/main.m3u8"
+    as="fetch">
+  <link rel="dns-prefetch" href="https://cdn.converteai.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="https://images.converteai.net">
+  <link rel="dns-prefetch" href="https://api.vturb.com.br">
+
+  <script>!function (i, n) { i._plt = i._plt || (n && n.timeOrigin ? n.timeOrigin + n.now() : Date.now()) }(window, performance);</script>
+  <link rel="preload"
+    href="https://scripts.converteai.net/4f1a052d-a90e-42b3-906d-f6a1a187abd2/players/698010b61385ff513706e12b/v4/player.js"
+    as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="preload"
+    href="https://cdn.converteai.net/4f1a052d-a90e-42b3-906d-f6a1a187abd2/6980109f0ac8fd40fc091372/main.m3u8"
+    as="fetch">
+  <link rel="dns-prefetch" href="https://cdn.converteai.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="https://images.converteai.net">
+  <link rel="dns-prefetch" href="https://api.vturb.com.br">
+
+
+
+</body>
+
+</html>
