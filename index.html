@@ -1770,12 +1770,44 @@
   <link rel="dns-prefetch" href="https://images.converteai.net">
   <link rel="dns-prefetch" href="https://api.vturb.com.br">
 
+<style>
+  .vsl-wrap-2{
+    width: 100%;
+    max-width: 520px; /* era 420 -> deixa um pouco maior */
+    margin: 0 auto;
+  }
 
+  .video-16x9-2{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;   /* melhor que padding-top */
+    border-radius: 12px;
+    overflow: visible;      /* evita cortar controles */
+  }
+
+  .video-16x9-2 vturb-smartplayer,
+  .video-16x9-2 iframe{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 12px;    /* mantém arredondado sem cortar */
+  }
+
+  /* mobile ocupa quase toda a tela */
+  @media (max-width: 480px){
+    .vsl-wrap-2{
+      max-width: 92vw;
+    }
+  }
+</style>
 
 </body>
 
 
 </html>
+
 
 
 
