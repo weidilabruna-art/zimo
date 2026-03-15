@@ -309,52 +309,30 @@
         <!-- 🔥 FIM DO VÍDEO -->
 
         <style>
-          /* Base */
-          .vsl-wrap {
-            width: 100%;
-            max-width: 640px;
-            /* Expanded for horizontal video */
-            margin: 0 auto;
-          }
+  /* Base */
+  .vsl-wrap {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+  }
 
-          .video-16x9 {
-  position: relative;
-  width: 100%;
-  padding-top: 177.77%; /* 9:16 vertical */
-  border-radius: 12px;
-  overflow: hidden;
-  max-width: 360px;
-  margin: 0 auto;
-}
+  .video-16x9 {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    border-radius: 12px;
+    overflow: hidden;
+  }
 
-.video-16x9 vturb-smartplayer,
-.video-16x9 iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-          .video-16x9 vturb-smartplayer,
-          .video-16x9 iframe {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-          }
-
-          /* MOBILE: ocupa a tela */
-          @media (max-width: 480px) {
-            .vsl-wrap {
-              width: calc(100vw - 32px) !important;
-              max-width: 640px !important;
-              margin-left: auto !important;
-              margin-right: auto !important;
-            }
-          }
-        </style>
+  .video-16x9 vturb-smartplayer,
+  .video-16x9 iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>
 
 
 
