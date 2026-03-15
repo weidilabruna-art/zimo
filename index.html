@@ -318,13 +318,23 @@
           }
 
           .video-16x9 {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%;
-            /* 16:9 landscape ratio */
-            border-radius: 12px;
-            overflow: hidden;
-          }
+  position: relative;
+  width: 100%;
+  padding-top: 177.77%; /* 9:16 vertical */
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.video-16x9 vturb-smartplayer,
+.video-16x9 iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
 
           .video-16x9 vturb-smartplayer,
           .video-16x9 iframe {
